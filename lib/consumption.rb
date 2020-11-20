@@ -7,10 +7,10 @@ class Consumption < Reader
   def calculate
     result = {}
 
-    self.read.each do |row|
-      currentUsage = result[:usage].to_i
+    read.each do |row|
+      current_usage = result['usage'].to_i
       usage = row[1].to_i * 1000
-      result[:usage] = currentUsage + usage
+      result['usage'] = current_usage + usage
     end
 
     result

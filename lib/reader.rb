@@ -9,10 +9,8 @@ class Reader
   end
 
   def read
-    if File.exist?(@file)
-      CSV.parse(File.read(@file), headers: true)
-    else
-      raise 'Please enter a valid file'
-    end
+    raise 'Please enter a valid file' unless File.exist?(@file)
+
+    CSV.parse(File.read(@file), headers: true)
   end
 end

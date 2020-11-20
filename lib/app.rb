@@ -21,8 +21,8 @@ class App
     generation = @generation.calculate
 
     result = @information.calculate.map do |house|
-      house["generation"] = generation[house["house_id"]]
-      house["consumption"] = consumption[:usage]
+      house['generation'] = generation[house['house_id']]
+      house['consumption'] = consumption['usage']
       house.to_hash
     end
 

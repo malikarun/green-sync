@@ -7,10 +7,10 @@ class Generation < Reader
   def calculate
     result = {}
 
-    self.read.each do |row|
-      currentWattHours = result[row[2]].to_i
-      wattHour = row[1].to_i / 12
-      result[row[2]] = currentWattHours + wattHour
+    read.each do |row|
+      current_watt_hours = result[row[2]].to_i
+      watt_hour = row[1].to_i / 12
+      result[row[2]] = current_watt_hours + watt_hour
     end
 
     result

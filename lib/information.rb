@@ -5,6 +5,6 @@ require_relative './reader'
 # Class for Information
 class Information < Reader
   def calculate
-    self.read
+    read
   end
 end
