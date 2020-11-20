@@ -20,12 +20,19 @@ class App
     consumption = @consumption.calculate
     generation = @generation.calculate
 
-    result = @information.calculate.map do |house|
+    @result = @information.calculate.map do |house|
       house['generation'] = generation[house['house_id']]
       house['consumption'] = consumption['usage']
       house.to_hash
     end
 
-    p result
+    report
+  end
+
+  def report
+    @result.each do |house|
+      p house
+      p "House #{house.house_id} generated #{house.house_id}Wh of electricity"
+    end
   end
 end
