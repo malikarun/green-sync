@@ -13,6 +13,6 @@ describe App do
   end
 
   it 'should place on right coord' do
-    assert_equal 'hello', @app.hello
+    assert_equal 'hello', @app.calculate
   end
 end

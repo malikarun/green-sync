@@ -10,8 +10,12 @@ RuboCop::RakeTask.new(:lint) do |task|
 end
 
 task :run do
-  app = App.new
-  app.hello
+  generation = ENV['generation'] || ENV['g']
+  consumption = ENV['consumption'] || ENV['c']
+  information = ENV['information'] || ENV['i']
+
+  app = App.new(generation, consumption, information)
+  app.calculate
 end
 
 task :test do
