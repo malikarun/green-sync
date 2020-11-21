@@ -17,26 +17,28 @@ class App
   end
 
   def report
-    calculate.each do |house|
-      consumption = house[:consumption]
-
-      # cost per person
-      cost = (consumption * house[:cost_per_kilowatt_hour])  / ( 1000 / house[:number_of_occupants])
-
+    calculate.map do |house|
       p "House #{house[:house_id]} generated #{house[:generation]}Wh of electricity"
-      p "House #{house[:house_id]} consumed #{consumption}Wh of electricity"
-      p "House id: #{house[:house_id]} averaged $#{cost} per person"
+      p "House #{house[:house_id]} consumed #{house[:consumption]}Wh of electricity"
+      p "House id: #{house[:house_id]} averaged $#{calculate_cost(house)} per person"
     end
   end
 
   private
 
   def calculate
-    consumption = @consumption.calculate
-    generation = @generation.calculate
-
     @information.calculate.map do |house|
-      house.merge({ generation: generation[house[:house_id]], consumption: consumption[:usage] })
+      house.merge({
+        generation: @generation.calculate[house[:house_id]],
+        consumption: @consumption.calculate[:usage]
+      })
     end
+  end
+
+  def calculate_cost(house)
+    cost_per_kh = house[:cost_per_kilowatt_hour].gsub(/[^\d\.]/, '').to_f
+    occupants = house[:number_of_occupants].to_i
+    # calculate cost per person
+    (house[:consumption] * cost_per_kh  /  1000 / occupants).round(2)
   end
 end
