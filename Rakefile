@@ -19,5 +19,9 @@ task :run do
 end
 
 task :test do
-  ruby 'test/test_app.rb'
+  ruby 'test/app_test.rb'
+  ruby 'test/generation_test.rb'
+  ruby 'test/information_test.rb'
+  ruby 'test/consumption_test.rb'
+  ruby 'test/reader_test.rb'
 end
