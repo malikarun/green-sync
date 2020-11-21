@@ -28,17 +28,14 @@ class App
 
   def calculate
     @information.calculate.map do |house|
-      house.merge({
-        generation: @generation.calculate[house[:house_id]],
-        consumption: @consumption.calculate[:usage]
-      })
+      house.merge({ generation: @generation.calculate[house[:house_id]], consumption: @consumption.calculate[:usage] })
     end
   end
 
   def calculate_cost(house)
-    cost_per_kh = house[:cost_per_kilowatt_hour].gsub(/[^\d\.]/, '').to_f
+    cost_per_kh = house[:cost_per_kilowatt_hour].gsub(/[^\d.]/, '').to_f
     occupants = house[:number_of_occupants].to_i
     # calculate cost per person
-    (house[:consumption] * cost_per_kh  /  1000 / occupants).round(2)
+    (house[:consumption] * cost_per_kh / 1000 / occupants).round(2)
   end
 end

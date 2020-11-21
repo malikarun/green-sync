@@ -9,6 +9,7 @@ class Reader
   end
 
   private
+
   # read the csv and parse it with key value pairs
   def read
     raise 'Please enter a valid file' unless File.exist?(@file)
