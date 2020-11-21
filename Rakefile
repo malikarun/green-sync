@@ -15,7 +15,7 @@ task :run do
   information = ENV['information'] || ENV['i']
 
   app = App.new(generation, consumption, information)
-  app.calculate
+  app.report
 end
 
 task :test do

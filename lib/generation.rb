@@ -8,9 +8,9 @@ class Generation < Reader
     result = {}
 
     read.each do |row|
-      current_watt_hours = result[row[2]].to_i
-      watt_hour = row[1].to_i / 12
-      result[row[2]] = current_watt_hours + watt_hour
+      current_watt_hours = result[row[:house_id]].to_i
+      watt_hour = row[:power_real].to_i / 12
+      result[row[:house_id]] = current_watt_hours + watt_hour
     end
 
     result

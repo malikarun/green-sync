@@ -4,15 +4,8 @@ require_relative './reader'
 
 # Class for Consumption
 class Consumption < Reader
+  # return total usage for an average house
   def calculate
-    result = {}
-
-    read.each do |row|
-      current_usage = result['usage'].to_i
-      usage = row[1].to_i * 1000
-      result['usage'] = current_usage + usage
-    end
-
-    result
+    { usage: read.sum { |row| row[:usage].to_i * 1000 } }
   end
 end

@@ -16,23 +16,21 @@ class App
     @information = Information.new(information)
   end
 
+  def report
+    calculate.each do |house|
+      p "House #{house[:house_id]} generated #{house[:generation]}Wh of electricity"
+      p "House #{house[:house_id]} consumed #{house[:consumption]}Wh of electricity"
+    end
+  end
+
+  private
+
   def calculate
     consumption = @consumption.calculate
     generation = @generation.calculate
 
-    @result = @information.calculate.map do |house|
-      house['generation'] = generation[house['house_id']]
-      house['consumption'] = consumption['usage']
-      house.to_hash
-    end
-
-    report
-  end
-
-  def report
-    @result.each do |house|
-      p house
-      p "House #{house.house_id} generated #{house.house_id}Wh of electricity"
+    @information.calculate.map do |house|
+      house.merge({ generation: generation[house[:house_id]], consumption: consumption[:usage] })
     end
   end
 end
