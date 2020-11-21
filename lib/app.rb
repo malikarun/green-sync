@@ -18,8 +18,14 @@ class App
 
   def report
     calculate.each do |house|
+      consumption = house[:consumption]
+
+      # cost per person
+      cost = (consumption * house[:cost_per_kilowatt_hour])  / ( 1000 / house[:number_of_occupants])
+
       p "House #{house[:house_id]} generated #{house[:generation]}Wh of electricity"
-      p "House #{house[:house_id]} consumed #{house[:consumption]}Wh of electricity"
+      p "House #{house[:house_id]} consumed #{consumption}Wh of electricity"
+      p "House id: #{house[:house_id]} averaged $#{cost} per person"
     end
   end
 
