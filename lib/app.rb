@@ -17,7 +17,7 @@ class App
   end
 
   def report
-    calculate.map do |house|
+    calculate.each do |house|
       p "House #{house[:house_id]} generated #{house[:generation]}Wh of electricity"
       p "House #{house[:house_id]} consumed #{house[:consumption]}Wh of electricity"
       p "House id: #{house[:house_id]} averaged $#{calculate_cost(house)} per person"
